@@ -1,0 +1,15 @@
+Maker_LED_Matrix		KEYWORD1
+begin			KEYWORD2
+initLEDMatrix		KEYWORD2
+brightness		KEYWORD2
+message			KEYWORD2
+stopScroll		KEYWORD2
+resumeScroll		KEYWORD2
+deleteScroll		KEYWORD2
+picture			KEYWORD2
+scrollPicture		KEYWORD2
+scrollTxtAndPics	KEYWORD2
+repeatCount		KEYWORD2
+wifiNetwork		KEYWORD2
+webPage			KEYWORD2
+webPageText		KEYWORD2
