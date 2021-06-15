@@ -100,13 +100,13 @@ void Maker_LED_Matrix::writeScroll() {
 }
 //--------------------------------------FUNCTIONS FOR INIT--------------------------------------
 
-int Maker_LED_Matrix::begin(Maker_LED_Matrix *g) {
+void Maker_LED_Matrix::begin(Maker_LED_Matrix *g) {
 	_brightness = 32;                             //Set default levels for font brightness, background brightness, delay between scrolls and scroll step.
 	_backBrightness = 2;
 	_pause = 150;
 	_step = 1;
 	j = g;
-	Wire.begin(4, 5);
+	Wire.begin(IS31FL3731_SDA, IS31FL3731_SCL);
 	twi_setClock(400000);
 	
 	for(int i = 0; i<_n; i++) {
@@ -131,7 +131,7 @@ int Maker_LED_Matrix::begin(Maker_LED_Matrix *g) {
 			writeData(_adr[k], f, i, 0xff);     // each 8 LEDs on
 		}
 	}
-	setTextWrap(false);         //Turn of text wrapin, we do not need that on this screen.
+	setTextWrap(false);         //Turn of text wraping, we do not need that on this screen.
 	setTextColor(_brightness, _backBrightness);
 	setRotation(0);
 }
@@ -146,7 +146,7 @@ void Maker_LED_Matrix::brightness(uint8_t _fontLight, uint8_t _backingLight) {
 void Maker_LED_Matrix::message(char* msg, int _ms, int _stp, int _rep) {
 	if(_ms < 75 ) _ms = 75;
 	if(_stp < 1 ) _stp = 1;
-	if(_rep < -1) _rep = -1;//It doesn't make any sense to make delay less than 10 ms, especially negative one and step smaller than 1, so if that happens, set preset values.
+	if(_rep < -1) _rep = -1;//It doesn't make any sense to make delay less than 75 ms, especially negative one and step smaller than 1, so if that happens, set preset values.
 	if(strlen(msg) > _BUFFERSIZE) return;   //If size of string is much bigger of size of buffer, do not do anything more, it will overflow.
 	_step = _stp;                                   //Save what user want for delay and step for scrolling.
 	_pause = _ms;
@@ -178,7 +178,7 @@ void Maker_LED_Matrix::message(char* msg, int _ms, int _stp, int _rep) {
 void Maker_LED_Matrix::picture(const uint8_t* p, uint8_t sizex, uint8_t sizey, int _ms, int _stp, int _rep) {
 	if(_ms < 75 ) _ms = 75;
 	if(_stp < 1 ) _stp = 1;
-	if(_rep < -1) _rep = -1;//It doesn't make any sense to make delay less than 10 ms, especially negative one and step smaller than 1, so if that happens, set preset values.
+	if(_rep < -1) _rep = -1;//It doesn't make any sense to make delay less than 75 ms, especially negative one and step smaller than 1, so if that happens, set preset values.
 	if(p==NULL) return;
 	_pic = p;
 	_picSizeX = sizex;
@@ -211,7 +211,7 @@ void Maker_LED_Matrix::picture(const uint8_t* p, uint8_t sizex, uint8_t sizey, i
 void Maker_LED_Matrix::picture8Bit(const uint8_t* p, int sizex, int sizey, int _ms, int _stp, int _rep) {
 	if(_ms < 75 ) _ms = 75;
 	if(_stp < 1 ) _stp = 1;
-	if(_rep < -1) _rep = -1;//It doesn't make any sense to make delay less than 10 ms, especially negative one and step smaller than 1, so if that happens, set preset values.
+	if(_rep < -1) _rep = -1;//It doesn't make any sense to make delay less than 75 ms, especially negative one and step smaller than 1, so if that happens, set preset values.
 	if(p==NULL) return;
 	_pic = p;
 	_picSizeX = sizex;

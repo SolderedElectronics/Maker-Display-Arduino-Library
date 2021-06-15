@@ -61,7 +61,7 @@ static const uint8_t _adr[4] = {0x74, 0x77, 0x75, 0x76};
 class Maker_LED_Matrix : public Adafruit_GFX {
       public:
             Maker_LED_Matrix(uint8_t n);
-            int begin(Maker_LED_Matrix *g);                 
+            void begin(Maker_LED_Matrix *g);                 
 			void drawPixel(int16_t x, int16_t y, uint16_t color);
 			void display();
             void brightness(uint8_t _fontLight, uint8_t _backingLight);      //Sets up font brightness and background brightness.
